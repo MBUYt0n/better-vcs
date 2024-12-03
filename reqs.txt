@@ -1,0 +1,1 @@
+texttable, brotli, pyzstd, pyppmd, pycryptodomex, pybcj, multivolumefile, inflate64, py7zr
