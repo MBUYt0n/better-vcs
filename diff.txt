@@ -1,0 +1,77 @@
+||
+Fri Dec 27 18:24:37 2024
+10c10
+< 
+---
+> sending = True
+13a14,15
+>     global sending
+>     sending = False
+17a20
+>     global sending
+29c32
+<         while True:
+---
+>         while sending:
+||
+Fri Dec 27 18:24:37 2024
+12,13c12
+< def end_call(s, host, port):
+<     s.sendto(b"end", (host, port))
+---
+> def end_call(s):
+50c49
+<     while True:
+---
+>     while sending:
+52,54d50
+<         if data == b"end":
+<             break
+< 
+65a62
+>     s.close()
+||
+Fri Dec 27 18:24:37 2024
+26c26,29
+<         s.sendto(encoded_audio, (host, port))
+---
+>         try:
+>             s.sendto(encoded_audio, (host, port))
+>         except Exception as e:
+>             print("Connection closed")
+||
+Fri Dec 27 18:24:37 2024
+10d9
+< sending = True
+12,15c11,13
+< def end_call(s):
+<     global sending
+<     sending = False
+<     s.close()
+---
+> 
+> def end_call(s, host, port):
+>     s.sendto(b"end", (host, port))
+19d16
+<     global sending
+26,29c23
+<         try:
+<             s.sendto(encoded_audio, (host, port))
+<         except Exception as e:
+<             print("Connection closed")
+---
+>         s.sendto(encoded_audio, (host, port))
+34c28
+<         while sending:
+---
+>         while True:
+52c46
+<     while sending:
+---
+>     while True:
+53a48,50
+>         if data == b"end":
+>             break
+> 
+65d61
+<     s.close()
